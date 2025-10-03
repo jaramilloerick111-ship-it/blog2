@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce de Chilacayote con Piloncillo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(rgba(40, 241, 57, 0.986), rgb(252, 251, 251),rgb(248, 88, 88)), 
+                  url("imagenes/hero.jpg") no-repeat center/cover;
+      background-color: #fafafa;
+      color: #333;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .header {
+      background: #30fd4c;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+    .header nav a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+    .header nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Botón modo oscuro */
+    #theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      border: none;
+      background: transparent;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .receta-contenedor {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .tarjeta-receta {
+      background: linear-gradient(rgba(40, 241, 57, 0.986), rgb(252, 251, 251),rgb(248, 88, 88));
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, background 0.3s, color 0.3s;
+    }
+    .tarjeta-receta:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #222;
+    }
+    ul, ol {
+      margin: 10px 0 10px 20px;
+    }
+
+    figure {
+      text-align: center;
+      margin: 20px 0;
+    }
+    figure img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+      transition: filter 0.3s;
+    }
+    figcaption {
+      margin-top: 8px;
+      font-style: italic;
+      color: #555;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 15px;
+      background: rgb(248, 88, 88);
+      margin-top: 30px;
+      border-top: 1px solid #ddd;
+      transition: background 0.3s, color 0.3s;
+    }
+    .footer a {
+      color: #0e0d0c;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Modo oscuro */
+    body.dark-mode {
+      background: #222;
+      color: #eee;
+    }
+    body.dark-mode .header {
+      background: #444;
+      color: #fff;
+    }
+    body.dark-mode .tarjeta-receta {
+      background: #333;
+      color: #eee;
+    }
+    body.dark-mode figure figcaption {
+      color: #ccc;
+    }
+    body.dark-mode .footer {
+      background: #444;
+      color: #fff;
+    }
+    body.dark-mode figure img {
+      filter: brightness(0.8);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Receta: Dulce de Chilacayote con Piloncillo</h1>
+    <button id="theme-toggle">🌙</button>
+    <nav>
+      <a href="index.html">⬅ Volver al inicio</a>
+    </nav>
+  </header>
+
+  <main class="receta-contenedor">
+    <article class="tarjeta-receta">
+      <h2>Ingredientes</h2>
+      <ul>
+        <li>1 kilo de chilacayote en cubos</li>
+        <li>2 piloncillos (aprox. 400 g)</li>
+        <li>2 rajas de canela</li>
+        <li>3 clavos de olor</li>
+        <li>Agua (la necesaria)</li>
+      </ul>
+    </article>
+
+    <article class="tarjeta-receta">
+      <h2>Preparación</h2>
+      <ol>
+        <li>Pela y corta el chilacayote en cubos medianos.</li>
+        <li>Hierve en agua con los piloncillos, canela y clavos hasta que el chilacayote esté suave y el almíbar espese.</li>
+        <li>Deja enfriar un poco y sirve como postre acompañado de leche o pan.</li>
+      </ol>
+    </article>
+
+    <figure>
+      <img src="imagenes/dulce.jfif" alt="Dulce de Chilacayote con Piloncillo">
+      <figcaption>Dulce de Chilacayote con Piloncillo listo para deleitar, un delicioso postre.</figcaption>
+    </figure>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 JARAMILLITO | <a href="index.html">Volver al blog</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if(document.body.classList.contains('dark-mode')){
+        themeToggle.textContent = '☀️';
+      } else {
+        themeToggle.textContent = '🌙';
+      }
+    });
+  </script>
+</body>
+</html>

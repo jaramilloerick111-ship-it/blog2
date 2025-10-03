@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Culinario</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+    body{background:#e7e4e4;color:#111;transition:.3s;}
+    h2{text-align:center;margin-bottom:15px;}
+    img{max-width:100%;display:block;}
+
+    .header{
+      position:sticky;top:0;z-index:1000;
+      background:linear-gradient(to right,green,rgb(230, 226, 226),red);
+      padding:15px;text-align:center;display:flex;justify-content:space-between;align-items:center;
+    }
+    .header h1{color:#fff;font-size:1.4rem;}
+    nav ul{display:flex;list-style:none;gap:15px;}
+    nav a{color:#fff;text-decoration:none;font-weight:bold;position:relative;}
+    nav a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:#ffe600;transition:.3s;}
+    nav a:hover::after{width:100%;}
+    .menu-toggle{display:none;font-size:22px;color:#fff;background:none;border:none;cursor:pointer;}
+
+    .hero{background:linear-gradient(rgba(53, 248, 53, 0.76),rgba(255,255,255,.6),rgba(255,0,0,.6)),url("imagenes/hero.jpg")center/cover no-repeat;
+      color:rgb(224, 222, 222);padding:90px 20px;text-align:center;animation:fadeIn 2s;}
+    .hero h2{font-size:2rem;margin-bottom:10px;}
+    .btn{display:inline-block;background:#22ee33d8;color:#ebe5e5;padding:10px 20px;border-radius:6px;text-decoration:none;transition:.3s;}
+    .btn:hover{background:#f01722;}
+
+    .receta-contenedor{max-width:1100px;margin:40px auto;padding:20px;}
+    .tarjetas{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+    .tarjeta-receta {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 300px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .tarjeta-receta:hover{transform:translateY(-5px);}
+    .badge{display:inline-block;background:#f01722;color:#e6e1e1;padding:4px 8px;border-radius:5px;font-size:.8rem;margin-bottom:5px;}
+    .info{font-size:.85rem;color:#555;margin:5px 0;}
+
+
+    .categorias{background:linear-gradient(to right,rgba(53, 243, 28, 0.767),rgb(245, 242, 242),red);padding:30px 20px;color:white;}
+    .grid-categorias{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-top:15px;}
+    .categoria{background:rgba(0,0,0,.6);padding:15px;border-radius:8px;font-weight:bold;display:flex;flex-direction:column;align-items:center;}
+    .categoria span{font-size:.9rem;color:#ffe600;}
+
+
+    .menu{padding:40px 20px;background:#fafafa;}
+    .grid-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+    .item-menu{background:#dbd8d8;padding:15px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,.1);text-align:center;}
+
+    .sobre-mi{background:#e6e3e3;padding:20px;text-align:center;}
+    .sobre-mi img{border-radius:50%;width:150px;margin-top:10px;}
+
+    .newsletter{background:linear-gradient(to right,rgba(62, 230, 28, 0.836),rgb(226, 223, 223),red);color:white;text-align:center;padding:40px 20px;}
+    .newsletter input{padding:10px;border:none;border-radius:6px;margin-right:10px;}
+    .newsletter button{padding:10px 20px;border:none;background:#198754;color:#fff;font-weight:bold;border-radius:6px;cursor:pointer;}
+    .newsletter button:hover{background:#f01722;}
+    .social-icons{margin-top:15px;}
+    .social-icons a{margin:0 10px;font-size:24px;color:#fff;text-decoration:none;}
+    .social-icons a:hover{color:#ffe600;}
+
+
+    .footer{background:linear-gradient(to right,rgba(24, 240, 24, 0.774),rgb(224, 218, 218),red);padding:15px;text-align:center;font-weight:bold;}
+
+
+    body.dark-mode{background:#222;color:#eee;}
+    body.dark-mode .tarjeta-receta,body.dark-mode .item-menu{background:#333;color:#eeeeee;}
+    body.dark-mode .sobre-mi{background:#333;color:#d8d3d3;}
+
+  
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+   
+    @media(max-width:768px){
+      nav ul{flex-direction:column;display:none;background:#333;position:absolute;top:60px;right:0;width:200px;}
+      nav ul.show{display:flex;}
+      .menu-toggle{display:block;}
+    }
+    .hero {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120%; 
+  height: 120%;
+  background: url('imagenes/imagen2.jfif') no-repeat center center/cover;
+  filter: brightness(0.6);
+  z-index: 1;
+  animation: moveBg 30s linear infinite;
+}
+
+@keyframes moveBg {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.1) translate(-10px, -10px); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  background: #d6ddd3;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #fcfdfc;
+}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>🍴 Mi Blog Culinario</h1>
+    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+    <nav><ul>
+      <li><a href="#hero">Inicio</a></li>
+      <li><a href="#recetas">Recetas</a></li>
+      <li><a href="#categorias">Categorías</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul></nav>
+    <button id="theme-toggle">🌞</button>
+  </header>
+
+  <section id="hero" class="hero">
+  <div class="hero-bg"><img src="imagenes/imagen2.jfif" alt=""></div> 
+  <div class="hero-content">
+    <h2>😎Cocinando con Jaramillito🍽</h2>
+    <p>Descubre recetas caseras, tradicionales y creativas para compartir en familia.</p>
+    <a href="#recetas" class="btn">Ver Recetas</a>
+  </div>
+</section>
+
+  <main id="recetas" class="receta-contenedor">
+    <h2>🍴Recetas Destacadas🍴</h2>
+    <div class="tarjetas">
+      <article class="tarjeta-receta">
+        <span class="badge">⭐ Receta Destacada</span>
+        <img src="imagenes/atole-piña.jfif" alt="Atole de piña">
+        <h3>Atole de Piña</h3>
+        <p>Bebida tradicional mexicana hecha con piña natural.</p>
+        <a href="receta-atole-piña.html" class="btn">Ver receta</a>
+      </article>
+      <article class="tarjeta-receta">
+        <img src="imagenes/dulce.jfif" alt="Dulce de Chilacayote">
+        <h3>Dulce de Chilacayote</h3>
+        <p>Un postre tradicional y delicioso para disfrutar con la familia.</p>
+        <a href="dulce.html" class="btn">Ver receta</a>
+      </article>
+      <article class="tarjeta-receta">
+        <img src="imagenes/tortitas.jfif" alt="Tortitas de Huauzontle en Salsa Roja">
+        <h3>Tortitas de Huauzontle en Salsa Roja</h3>
+        <p>Tortitas de Huauzontle en Salsa Roja tradiconales</p>
+        <a href="tortitas.html" class="btn">Ver receta</a>
+      </article>
+    </div>
+  </main>
+
+  <section id="categorias" class="categorias">
+    <h2>Categorías</h2>
+    <div class="grid-categorias">
+      <div class="categoria"><i class="fas fa-coffee"></i> Bebidas<span>(3)</span></div>
+      <div class="categoria"><i class="fas fa-utensils"></i> Comidas<span>(5)</span></div>
+      <div class="categoria"><i class="fas fa-ice-cream"></i> Postres<span>(4)</span></div>
+    </div>
+  </section>
+  <section id="menu" class="menu">
+    <h2>🍽 Menú del Día 🍽</h2>
+    <div class="grid-menu">
+      <article class="item-menu">
+        <center>
+        <img src="imagenes/atole-piña.jfif" alt="Atole de Piña">
+        <h3>Atole de Piña</h3>
+        <p>Bebida tradicional mexicana hecha con piña natural.</p>
+        <p>$30</p>
+        </center>
+      </article>
+      <article class="item-menu">
+        <center>
+        <img src="imagenes/tortitas.jfif" alt="Tortitas de Huauzontle en Salsa Roja">
+        <h3>Tortitas de Huauzontle en Salsa Roja</h3>
+        <p>Tortitas de Huauzontle en Salsa Roja tradiconales</p>
+        <p>$70</p>
+        </center>
+      </article>
+    </div>
+  </section>
+
+  <section id="sobre-mi" class="sobre-mi">
+    <h2>Sobre mí</h2>
+    <p>¡Hola! Soy ERICK SAMUEL y esto es recetas Jaramillito. Mi pasión por la cocina me inspira a compartir estas recetas.</p>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <center>
+    <img src="imagenes/imagen.jfif" alt="Erick cocinando">
+    </center>
+  </section>
+
+  <section id="contacto" class="newsletter">
+    <h2>Contacto</h2>
+    <p>Recibe nuevas recetas directamente en tu correo.</p>
+    <form>
+      <input type="email" placeholder="Tu correo electrónico" required>
+      <button type="submit">Suscribirme</button>
+    </form>
+    <div class="social-icons">
+      <a href="https://https://www.facebook.com/share/1AMYXcvTny/" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://https://www.instagram.com/erick_jc16?igsh=MTI0ejR5azg5OHk0aw==" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© Erick Samuel Jaramillo Cuero 2025 | contacto@jaramillito.com</p>
+  </footer>
+
+  <script>
+    const themeToggle=document.getElementById('theme-toggle');
+    const body=document.body;
+    if(localStorage.getItem('theme')==='dark'){body.classList.add('dark-mode');themeToggle.textContent='🌙';}
+    themeToggle.addEventListener('click',()=>{
+      body.classList.toggle('dark-mode');
+      if(body.classList.contains('dark-mode')){localStorage.setItem('theme','dark');themeToggle.textContent='🌙';}
+      else{localStorage.setItem('theme','light');themeToggle.textContent='🌞';}
+    });
+
+    const toggleBtn=document.querySelector('.menu-toggle');
+    const navMenu=document.querySelector('nav ul');
+    toggleBtn.addEventListener('click',()=>{navMenu.classList.toggle('show');});
+  </script>
+</body>
+</html>
+
+
